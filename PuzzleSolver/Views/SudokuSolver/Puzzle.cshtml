@@ -1,0 +1,33 @@
+﻿@model DictionaryGrid
+
+@{
+    ViewData["Title"] = "New Puzzle";
+}
+
+<h2>Sudoku</h2>
+
+<p>Enter your Sudoku puzzle</p>
+
+@*
+<form method="post" action="location.href='@Url.Action("SolvePuzzle","SudokuSolver", Model)'">*@
+<div class="table">
+    <div style="border-width:thick">
+        @for (int i = 0; i < Model.MaxValue; i++)
+        {
+            <div style="display:flex" class="puzzleRow">
+                @for (int j = 0; j < Model.MaxValue; j++)
+                {
+                    <input asp-for="GetSquare(i,j).Value" class="form-control puzzleSquare" type="text" id="Value@(i)@(j)" name="Value" style="width:10%;" />
+                }
+            </div>
+        }
+    </div>
+</div>
+    @*<input type="submit" value="Submit Puzzle" />
+        </form>
+    *@
+
+
+<input type="button" value="Submit Puzzle" onclick="location.href='@Url.Action("SolvePuzzle","SudokuSolver", Model.ReturnGridAsArray())'" />
+
+@*onclick="location.href='@Url.Action("SolvePuzzle","SudokuSolver", Model)'"*@

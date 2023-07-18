@@ -1,0 +1,39 @@
+﻿@model DictionaryGrid
+
+@{
+    ViewData["Title"] = "Solved Puzzle";
+}
+
+<h2>Sudoku</h2>
+
+<p>Here is your finished Sudoku puzzle</p>
+
+<div class="table">
+    <div style="border-width:thick">
+        @for (int i = 0; i < Model.MaxValue; i++)
+        {
+            <div style="display:flex" class="puzzleRow">
+                @for (int j = 0; j < Model.MaxValue; j++)
+                {
+                    Square square = Model.GetSquare(i, j);
+                    @if (square.Value == 0)
+                    {
+                        <label style="font-size: 8px; min-width:45px">
+                            @foreach (int possible in square.PossibleValues)
+                            {
+                                @possible
+                            }
+                        </label>
+                    }
+                    else
+                    {
+                        <label style="min-width:45px">
+                            @square.Value
+                        </label>
+                    }
+                    @*<input asp-for="Squares[new GridIndex(i,j)].Value" class="form-control puzzleSquare" type="text" id="Value@(i)@(j)" name="Value" style="width:10%;" disabled="true" />*@
+                }
+            </div>
+        }
+    </div>
+</div>

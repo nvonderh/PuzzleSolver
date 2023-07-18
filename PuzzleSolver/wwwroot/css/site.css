@@ -1,0 +1,36 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.puzzleSquare {
+    border-radius: 0;
+    border-left: dotted;
+}
+    .puzzleSquare:nth-of-type(3n+4) {
+        border-left-style: solid;
+        border-left-width: thick;
+    }
+
+.puzzleRow {
+    border-top: dotted;
+}
+
+    .puzzleRow:nth-of-type(3n+4) {
+        border-top-style: solid;
+        border-top-width: thick;
+    }
+
+body {
+  margin-bottom: 60px;
+}
