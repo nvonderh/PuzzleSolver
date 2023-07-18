@@ -88,6 +88,15 @@ namespace PuzzleSolver.Models.Sudoku
             return false;
         }
 
+
+        // Example 1: The row has 3 unsolved squares with possible values [4,5,7],[4,5,7],[4,7] where the first two squares
+        // are in Box 1, while the third is in Box 2. The 5 in Box 1 MUST be in one of the two squares from the row, therefore
+        // 5 can be removed from the possible values for every other square in Box 1.
+        /// <summary>
+        /// Taking some of the logic for CheckGridForUniqueValues and applying it for overlapping groups. In this instance
+        /// a row or column overlapping with boxes.
+        /// </summary>
+        /// <returns>true if a change was made</returns>
         public virtual bool CheckGridForUniqueValuesSubGroups()
         {
             bool madeChange = false;
