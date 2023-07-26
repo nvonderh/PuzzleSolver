@@ -16,7 +16,7 @@ namespace PuzzleSolver.Models.Sudoku
         {
 
         }
-        public SudokuPuzzle(DictionaryGrid grid)
+        public SudokuPuzzle(Grid grid)
             : base(grid)
         {
 
@@ -72,7 +72,7 @@ namespace PuzzleSolver.Models.Sudoku
                 return true;
             }
 
-            // Find a square in a group that is the only one that COULD be a value
+            // Clean up Possible Values by looking at the other Squares' Possible Values
             madeChange |= EliminatePossibleValues();
             if (PuzzleIsSolved())
             {

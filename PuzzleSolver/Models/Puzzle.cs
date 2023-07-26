@@ -11,12 +11,12 @@ namespace PuzzleSolver.Models
         public Puzzle(int[][] values) 
         {
             Boxes = new List<Box>();
-            PuzzleGrid = new DictionaryGrid(values);
+            SetupGrid(values);
             SetupBoxes();
             SetupPossibleAnswers();
         }
 
-        public Puzzle(DictionaryGrid grid)
+        public Puzzle(Grid grid)
         {
             Boxes = new List<Box>();
             PuzzleGrid = grid;
@@ -31,6 +31,10 @@ namespace PuzzleSolver.Models
 
         public abstract bool Solve(ref bool madeChange);
         public abstract void SetupBoxes();
+        public virtual void SetupGrid(int[][] values)
+        {
+            PuzzleGrid = new DictionaryGrid(values);
+        }
 
         public List<Box> GetMatchingBoxes(List<Square> squares)
         {
@@ -55,7 +59,11 @@ namespace PuzzleSolver.Models
             Box? box = Boxes.FirstOrDefault(a => a.Squares.Contains(solvedSqure));
             if (box != null)
             {
-                RemoveFromPossibleValues(box.Squares, solvedSqure.Value);
+                //if (box.Rules.Any(b => b.Type == RuleTypes.NoDuplicates))
+                //{
+                //    RemoveFromPossibleValues(box.Squares, solvedSqure.Value);
+                //}
+                box.UpdateBox(solvedSqure);
             }
         }
 
@@ -72,15 +80,14 @@ namespace PuzzleSolver.Models
 
         public virtual void RemoveFromPossibleAnswers(Square square, ref List<int> possibleAnswers)
         {
-            RemovePossibleAnswerFromSquares(PuzzleGrid.GetRow(square.Y), ref possibleAnswers);
-            RemovePossibleAnswerFromSquares(PuzzleGrid.GetColumn(square.X), ref possibleAnswers);
-
             Box? box = Boxes.FirstOrDefault(a => a.Squares.Contains(square));
             if (box != null)
             {
                 box.RemovePossibleAnswers(ref possibleAnswers);
             }
 
+            RemovePossibleAnswerFromSquares(PuzzleGrid.GetRow(square.Y), ref possibleAnswers);
+            RemovePossibleAnswerFromSquares(PuzzleGrid.GetColumn(square.X), ref possibleAnswers);
         }
 
         public virtual void RemovePossibleAnswerFromSquares(List<Square> squareList, ref List<int> possibleAnswers)

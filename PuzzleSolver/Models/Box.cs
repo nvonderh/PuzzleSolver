@@ -4,21 +4,24 @@
     {
         public List<Square> Squares { get; set; }
         public List<Rule> Rules { get; set; }
+        public int MaxValue { get; set; }
 
         public Box() 
         {
             Squares = new List<Square>();
             Rules = new List<Rule>();
+            MaxValue = 9;
+        }
+
+        public List<Square> UnsolvedSquares
+        {
+            get
+            {
+                return Squares.Where(a => !a.Solved).ToList();
+            }
         }
 
         public abstract void RemovePossibleAnswers(ref List<int> possibleAnswers);
-        public virtual void FindUniqueValue(List<Square> squares, ref bool madeChange)
-        {
-            if (Rules.Any(a => a.Type ==  RuleTypes.NoDuplicates)) 
-            {
-
-            }
-        }
-        //public abstract void UpdateBox(Square solvedSquare);
+        public abstract void UpdateBox(Square solvedSquare);
     }
 }

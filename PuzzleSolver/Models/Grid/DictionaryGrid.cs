@@ -12,12 +12,12 @@ namespace PuzzleSolver.Models
             Squares = new Dictionary<GridIndex, Square>();
             GridIndex index;
 
-            for (int i = 0; i < MaxValue; i++)
+            for (int y = 0; y < MaxValue; y++)
             {
-                for (int j = 0; j < MaxValue; j++)
+                for (int x = 0; x < MaxValue; x++)
                 {
-                    index = new GridIndex(i, j);
-                    Squares[index] = new Square(i, j, 0);
+                    index = new GridIndex(x, y);
+                    Squares[index] = new Square(x, y, 0);
                 }
             }
         }
@@ -28,12 +28,12 @@ namespace PuzzleSolver.Models
             Squares = new Dictionary<GridIndex, Square>();
             GridIndex index;
 
-            for (int i = 0; i < MaxValue; i++)
+            for (int y = 0; y < MaxValue; y++)
             {
-                for (int j = 0; j < MaxValue; j++)
+                for (int x = 0; x < MaxValue; x++)
                 {
-                    index = new GridIndex(i, j);
-                    Squares[index] = new Square(i, j, values[i][j]);
+                    index = new GridIndex(x, y);
+                    Squares[index] = new Square(x, y, values[y][x]);
                 }
             }
         }
@@ -90,30 +90,6 @@ namespace PuzzleSolver.Models
             }
             return squares;
         }
-
-        //public override void UpdateRow(Square solvedSquare)
-        //{
-        //    List<Square> squareList = GetRow(solvedSquare.Y);
-        //    foreach (Square s in squareList)
-        //    {
-        //        if (!s.Solved && s.PossibleValues.Contains(solvedSquare.Value))
-        //        {
-        //            s.PossibleValues.Remove(solvedSquare.Value);
-        //        }
-        //    }
-        //}
-
-        //public override void UpdateColumn(Square solvedSquare)
-        //{
-        //    List<Square> squareList = GetColumn(solvedSquare.X);
-        //    foreach (Square s in squareList)
-        //    {
-        //        if (!s.Solved && s.PossibleValues.Contains(solvedSquare.Value))
-        //        {
-        //            s.PossibleValues.Remove(solvedSquare.Value);
-        //        }
-        //    }
-        //}
     }
 
     public class GridIndex

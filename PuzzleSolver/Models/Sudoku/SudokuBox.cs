@@ -25,15 +25,15 @@
             }
         }
 
-        //public override void UpdateBox(Square solvedSquare)
-        //{
-        //    foreach(Square s in Squares)
-        //    {
-        //        if (!s.Solved && s.PossibleValues.Any(a => a.Value == solvedSquare.Value))
-        //        {
-        //            s.PossibleValues.RemoveAll(a => a.Value == solvedSquare.Value);
-        //        }
-        //    }
-        //}
+        public override void UpdateBox(Square solvedSquare)
+        {
+            foreach (Square s in Squares)
+            {
+                if (!s.Solved && s.PossibleValuesContains(solvedSquare.Value))
+                {
+                    s.RemovePossibleValue(solvedSquare.Value);
+                }
+            }
+        }
     }
 }
